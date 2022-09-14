@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiXAMLBluetoothLE.Pages.HeartRatePage"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             xmlns:viewmodel="clr-namespace:MauiXAMLBluetoothLE.ViewModels"
+             x:DataType="viewmodel:HeartRatePageViewModel"
+             Title="{Binding Title}">
+
+    <Grid x:Name="HeartRatePageGrid"
+          ColumnDefinitions="*,*"
+          ColumnSpacing="6"
+          RowDefinitions="*,Auto"
+          RowSpacing="0"
+          BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+
+        <StackLayout Grid.RowSpan="2"
+                     Grid.ColumnSpan="2"
+                     BackgroundColor="Transparent">
+            <Grid RowDefinitions="*,*,*,*,*,*"
+                  RowSpacing="8"
+                  HorizontalOptions="CenterAndExpand"
+                  VerticalOptions="CenterAndExpand">
+
+                <Label Grid.Row="0"
+                       Text="{Binding HeartRateValue}"
+                       Style="{StaticResource ExtraLargeLabel}"
+                       HorizontalOptions="CenterAndExpand"/>
+
+                <Label Grid.Row="1"
+                       Text="beats per minute (bpm)"
+                       Style="{StaticResource MediumLabel}"
+                       HorizontalOptions="CenterAndExpand"/>
+
+                <Label Grid.Row="2"
+                       Text="{Binding Timestamp,StringFormat='Heart rate at {0:H:mm:ss zzz}'}"
+                       Style="{StaticResource MediumLabel}"
+                       HorizontalOptions="CenterAndExpand"/>
+
+                <!--<Label Grid.Row="3"
+                       Text="{Binding BatteryLevel, StringFormat='Battery level is {0} %'}"
+                       Style="{StaticResource LargeLabel}"
+                       HorizontalOptions="CenterAndExpand"/>-->
+
+                <Label Grid.Row="4"
+                       Text="Connect to Bluetooth LE device."
+                       Style="{StaticResource LargeLabel}"
+                       HorizontalOptions="CenterAndExpand"/>
+
+                <Label Grid.Row="5"
+                       Text="Disconnect from Bluetooth LE device."
+                       Style="{StaticResource LargeLabel}"
+                       HorizontalOptions="CenterAndExpand"/>
+
+            </Grid>
+        </StackLayout>
+
+        <Button x:Name="ConnectToButton"
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="8"
+                Command="{Binding ConnectToDeviceCandidateAsyncCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                IsVisible="{Binding IsNotBusy}"
+                Style="{StaticResource ButtonOutline}"
+                Text="Connect" />
+
+        <Button x:Name="DisconnectFromButton"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="8"
+                Command="{Binding DisconnectFromDeviceAsyncCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                IsVisible="{Binding IsNotBusy}"
+                Style="{StaticResource ButtonOutline}"
+                Text="Disconnect" />
+
+        <ActivityIndicator x:Name="HeartRatePageActivityIndicator"
+                           Grid.ColumnSpan="2"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="StartAndExpand" />
+    </Grid>
+</ContentPage>

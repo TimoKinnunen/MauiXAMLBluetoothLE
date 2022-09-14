@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MauiXAMLBluetoothLE.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:MauiXAMLBluetoothLE.Pages"
+    Shell.FlyoutBehavior="Flyout">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Dark={StaticResource DarkBackground}, Light={StaticResource LightBackground}}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource DarkBackground}}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Dark=#95FFFFFF, Light=#95000000}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Dark={StaticResource LightBackground}, Light={StaticResource DarkBackground}}" />
+            </Style>
+            <Style BasedOn="{StaticResource BaseStyle}" TargetType="ShellItem" ApplyToDerivedTypes="True" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <FlyoutItem Title="Scan and select device" 
+                FlyoutIcon="{StaticResource IconBluetoothLE}">
+        <ShellContent ContentTemplate="{DataTemplate pages:HomePage}"
+                      Route="HomePage" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Heart rate"
+                FlyoutIcon="{StaticResource IconHeartRate}">
+        <ShellContent ContentTemplate="{DataTemplate pages:HeartRatePage}"
+                      Route="HeartRatePage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Settings"
+                FlyoutIcon="{StaticResource IconGears}">
+        <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"
+                      Route="SettingsPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Instructions"
+                FlyoutIcon="{StaticResource IconInfo}">
+        <ShellContent ContentTemplate="{DataTemplate pages:InstructionsPage}"
+                      Route="InstructionsPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="About MauiXAMLBluetoothLE"
+                FlyoutIcon="{StaticResource IconInfo}">
+        <ShellContent ContentTemplate="{DataTemplate pages:AboutPage}"
+                      Route="AboutPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Privacy statement"
+                FlyoutIcon="{StaticResource IconInfo}">
+        <ShellContent ContentTemplate="{DataTemplate pages:PrivacyStatementPage}"
+                      Route="PrivacyStatementPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Battery level"
+                FlyoutIcon="{StaticResource IconBatteryLevel}">
+        <ShellContent ContentTemplate="{DataTemplate pages:BatteryLevelPage}"
+                      Route="BatteryLevelPage" />
+    </FlyoutItem>
+</Shell>
