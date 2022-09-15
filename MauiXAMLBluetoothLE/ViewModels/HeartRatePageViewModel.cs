@@ -33,10 +33,22 @@ public partial class HeartRatePageViewModel : BaseViewModel
             return;
         }
 
-        if (BluetoothLEService.NewDeviceCandidateFromMainPage.Id.Equals(Guid.Empty))
+        if (BluetoothLEService.NewDeviceCandidateFromHomePage.Id.Equals(Guid.Empty))
         {
-            await BluetoothLEService.ShowToastAsync($"Select a Bluetooth LE device first. Try again.");
-            return;
+            #region read device id from storage
+            var device_name = await SecureStorage.Default.GetAsync("device_name");
+            var device_id = await SecureStorage.Default.GetAsync("device_id");
+            if (!string.IsNullOrEmpty(device_id))
+            {
+                BluetoothLEService.NewDeviceCandidateFromHomePage.Name = device_name;
+                BluetoothLEService.NewDeviceCandidateFromHomePage.Id = Guid.Parse(device_id);
+            }
+            #endregion read device id from storage
+            else
+            {
+                await BluetoothLEService.ShowToastAsync($"Select a Bluetooth LE device first. Try again.");
+                return;
+            }
         }
 
         if (!BluetoothLEService.BluetoothLE.IsOn)
@@ -59,18 +71,18 @@ public partial class HeartRatePageViewModel : BaseViewModel
             {
                 if (BluetoothLEService.Device.State == DeviceState.Connected)
                 {
-                    if (BluetoothLEService.Device.Id.Equals(BluetoothLEService.NewDeviceCandidateFromMainPage.Id))
+                    if (BluetoothLEService.Device.Id.Equals(BluetoothLEService.NewDeviceCandidateFromHomePage.Id))
                     {
                         await BluetoothLEService.ShowToastAsync($"{BluetoothLEService.Device.Name} is already connected.");
                         return;
                     }
 
-                    if (BluetoothLEService.NewDeviceCandidateFromMainPage != null)
+                    if (BluetoothLEService.NewDeviceCandidateFromHomePage != null)
                     {
                         #region another device
-                        if (!BluetoothLEService.Device.Id.Equals(BluetoothLEService.NewDeviceCandidateFromMainPage.Id))
+                        if (!BluetoothLEService.Device.Id.Equals(BluetoothLEService.NewDeviceCandidateFromHomePage.Id))
                         {
-                            Title = $"{BluetoothLEService.NewDeviceCandidateFromMainPage.Name}";
+                            Title = $"{BluetoothLEService.NewDeviceCandidateFromHomePage.Name}";
                             await DisconnectFromDeviceAsync();
                             await BluetoothLEService.ShowToastAsync($"{BluetoothLEService.Device.Name} has been disconnected.");
                         }
@@ -79,7 +91,7 @@ public partial class HeartRatePageViewModel : BaseViewModel
                 }
             }
 
-            BluetoothLEService.Device = await BluetoothLEService.Adapter.ConnectToKnownDeviceAsync(BluetoothLEService.NewDeviceCandidateFromMainPage.Id);
+            BluetoothLEService.Device = await BluetoothLEService.Adapter.ConnectToKnownDeviceAsync(BluetoothLEService.NewDeviceCandidateFromHomePage.Id);
 
             if (BluetoothLEService.Device.State == DeviceState.Connected)
             {
@@ -93,6 +105,11 @@ public partial class HeartRatePageViewModel : BaseViewModel
                         {
                             Title = $"{BluetoothLEService.Device.Name}";
 
+                            #region save device id to storage
+                            await SecureStorage.Default.SetAsync("device_name", $"{BluetoothLEService.Device.Name}");
+                            await SecureStorage.Default.SetAsync("device_id", $"{BluetoothLEService.Device.Id}");
+                            #endregion save device id to storage
+
                             HeartRateMeasurementCharacteristic.ValueUpdated += HeartRateMeasurementCharacteristic_ValueUpdated;
                             await HeartRateMeasurementCharacteristic.StartUpdatesAsync();
                         }
@@ -102,8 +119,8 @@ public partial class HeartRatePageViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Unable to connect to {BluetoothLEService.NewDeviceCandidateFromMainPage.Name} {BluetoothLEService.NewDeviceCandidateFromMainPage.Id}: {ex.Message}.");
-            await Shell.Current.DisplayAlert($"{BluetoothLEService.NewDeviceCandidateFromMainPage.Name}", $"Unable to connect to {BluetoothLEService.NewDeviceCandidateFromMainPage.Name}.", "OK");
+            Debug.WriteLine($"Unable to connect to {BluetoothLEService.NewDeviceCandidateFromHomePage.Name} {BluetoothLEService.NewDeviceCandidateFromHomePage.Id}: {ex.Message}.");
+            await Shell.Current.DisplayAlert($"{BluetoothLEService.NewDeviceCandidateFromHomePage.Name}", $"Unable to connect to {BluetoothLEService.NewDeviceCandidateFromHomePage.Name}.", "OK");
         }
         finally
         {

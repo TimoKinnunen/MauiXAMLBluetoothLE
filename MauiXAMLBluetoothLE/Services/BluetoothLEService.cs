@@ -2,7 +2,7 @@
 
 public class BluetoothLEService
 {
-    public DeviceCandidate NewDeviceCandidateFromMainPage { get; set; } = new();
+    public DeviceCandidate NewDeviceCandidateFromHomePage { get; set; } = new();
     public List<DeviceCandidate> DeviceCandidateList { get; private set; }
     public IBluetoothLE BluetoothLE { get; private set; }
     public IAdapter Adapter { get; private set; }

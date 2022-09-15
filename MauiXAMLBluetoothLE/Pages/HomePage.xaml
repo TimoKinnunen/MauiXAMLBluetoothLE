@@ -85,7 +85,7 @@
                 Style="{StaticResource ButtonOutline}"
                 Text="Check Bluetooth" />
 
-        <ActivityIndicator x:Name="MainPageActivityIndicator"
+        <ActivityIndicator x:Name="HomePageActivityIndicator"
                            Grid.ColumnSpan="2"
                            IsRunning="{Binding IsScanning}"
                            IsVisible="{Binding IsScanning}"

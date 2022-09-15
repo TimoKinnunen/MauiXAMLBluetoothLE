@@ -8,4 +8,14 @@ public partial class App : Application
 
 		MainPage = new AppShell();
 	}
+
+	protected override void OnSleep()
+	{
+		base.OnSleep();
+	}
+
+	protected override void OnResume()
+	{
+		base.OnResume();
+	}
 }

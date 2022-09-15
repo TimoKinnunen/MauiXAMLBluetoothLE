@@ -8,7 +8,7 @@
 
     <ScrollView VerticalOptions="FillAndExpand">
         <VerticalStackLayout Padding="24">
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*"
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*"
                   RowSpacing="8"
                   HorizontalOptions="Fill"
                   VerticalOptions="Start">
@@ -34,6 +34,10 @@
 
                 <Label Grid.Row="5"
                        Text="Moisten BLE heart rate sensor's plastic electrode areas on the reverse side of the strap."
+                       Style="{StaticResource MediumLabel}"/>
+
+                <Label Grid.Row="6"
+                       Text="Go to page 'Heart rate' and connect if you have connected the same device earlier. No need to scan and select device."
                        Style="{StaticResource MediumLabel}"/>
             </Grid>
         </VerticalStackLayout>

@@ -35,7 +35,7 @@ public partial class HomePageViewModel : BaseViewModel
             return;
         }
 
-        BluetoothLEService.NewDeviceCandidateFromMainPage = deviceCandidate;
+        BluetoothLEService.NewDeviceCandidateFromHomePage = deviceCandidate;
 
         Title = $"{deviceCandidate.Name}";
 

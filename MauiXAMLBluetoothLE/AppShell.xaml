@@ -26,42 +26,49 @@
     <FlyoutItem Title="Scan and select device" 
                 FlyoutIcon="{StaticResource IconBluetoothLE}">
         <ShellContent ContentTemplate="{DataTemplate pages:HomePage}"
-                      Route="HomePage" />
+                      Route="HomePage" >
+        </ShellContent>
     </FlyoutItem>
-    
+
     <FlyoutItem Title="Heart rate"
                 FlyoutIcon="{StaticResource IconHeartRate}">
         <ShellContent ContentTemplate="{DataTemplate pages:HeartRatePage}"
-                      Route="HeartRatePage" />
+                      Route="HeartRatePage">
+        </ShellContent>
     </FlyoutItem>
 
     <FlyoutItem Title="Settings"
                 FlyoutIcon="{StaticResource IconGears}">
         <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"
-                      Route="SettingsPage" />
+                      Route="SettingsPage">
+        </ShellContent>
     </FlyoutItem>
 
     <FlyoutItem Title="Instructions"
                 FlyoutIcon="{StaticResource IconInfo}">
         <ShellContent ContentTemplate="{DataTemplate pages:InstructionsPage}"
-                      Route="InstructionsPage" />
+                      Route="InstructionsPage">
+        </ShellContent>
     </FlyoutItem>
 
     <FlyoutItem Title="About MauiXAMLBluetoothLE"
                 FlyoutIcon="{StaticResource IconInfo}">
         <ShellContent ContentTemplate="{DataTemplate pages:AboutPage}"
-                      Route="AboutPage" />
+                      Route="AboutPage">
+        </ShellContent>
     </FlyoutItem>
 
     <FlyoutItem Title="Privacy statement"
                 FlyoutIcon="{StaticResource IconInfo}">
         <ShellContent ContentTemplate="{DataTemplate pages:PrivacyStatementPage}"
-                      Route="PrivacyStatementPage" />
+                      Route="PrivacyStatementPage">
+        </ShellContent>
     </FlyoutItem>
 
     <FlyoutItem Title="Battery level"
                 FlyoutIcon="{StaticResource IconBatteryLevel}">
         <ShellContent ContentTemplate="{DataTemplate pages:BatteryLevelPage}"
-                      Route="BatteryLevelPage" />
+                      Route="BatteryLevelPage">
+        </ShellContent>
     </FlyoutItem>
 </Shell>
