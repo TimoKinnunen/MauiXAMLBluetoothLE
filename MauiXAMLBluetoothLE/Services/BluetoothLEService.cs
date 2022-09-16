@@ -131,21 +131,19 @@ public class BluetoothLEService
     }
     #endregion BluetoothStateChangedArgs
 
+#if ANDROID
     #region BluetoothPermissions
     public async Task<PermissionStatus> CheckBluetoothPermissions()
     {
         PermissionStatus status = PermissionStatus.Unknown;
-        if (DeviceInfo.Platform == DevicePlatform.Android)
+        try
         {
-            try
-            {
-                return await Permissions.CheckStatusAsync<BluetoothLEPermissions>();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Unable to check Bluetooth LE permissions: {ex.Message}.");
-                await Shell.Current.DisplayAlert($"Unable to check Bluetooth LE permissions", $"{ex.Message}.", "OK");
-            }
+            status = await Permissions.CheckStatusAsync<BluetoothLEPermissions>();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unable to check Bluetooth LE permissions: {ex.Message}.");
+            await Shell.Current.DisplayAlert($"Unable to check Bluetooth LE permissions", $"{ex.Message}.", "OK");
         }
         return status;
     }
@@ -153,21 +151,21 @@ public class BluetoothLEService
     public async Task<PermissionStatus> RequestBluetoothPermissions()
     {
         PermissionStatus status = PermissionStatus.Unknown;
-        if (DeviceInfo.Platform == DevicePlatform.Android)
+        try
         {
-            try
-            {
-                return await Permissions.RequestAsync<BluetoothLEPermissions>();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Unable to request Bluetooth LE permissions: {ex.Message}.");
-                await Shell.Current.DisplayAlert($"Unable to request Bluetooth LE permissions", $"{ex.Message}.", "OK");
-            }
+            status = await Permissions.RequestAsync<BluetoothLEPermissions>();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unable to request Bluetooth LE permissions: {ex.Message}.");
+            await Shell.Current.DisplayAlert($"Unable to request Bluetooth LE permissions", $"{ex.Message}.", "OK");
         }
         return status;
     }
     #endregion BluetoothPermissions
+#elif IOS
+#elif WINDOWS
+#endif
 
     public async Task ShowToastAsync(string message)
     {

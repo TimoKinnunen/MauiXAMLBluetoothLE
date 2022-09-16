@@ -56,6 +56,7 @@ public partial class HomePageViewModel : BaseViewModel
             return;
         }
 
+#if ANDROID
         PermissionStatus permissionStatus = await BluetoothLEService.CheckBluetoothPermissions();
         if (permissionStatus != PermissionStatus.Granted)
         {
@@ -66,6 +67,9 @@ public partial class HomePageViewModel : BaseViewModel
                 return;
             }
         }
+#elif IOS
+#elif WINDOWS
+#endif
 
         try
         {
