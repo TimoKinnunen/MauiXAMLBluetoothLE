@@ -5,3 +5,9 @@
 To read code and understand it is simple.
 
 This app might bring closer Bluetooth LE to .Net MAUI. I hope so.
+
+Using Microsoft Visual Studio Community 2022 (64-bit) - Preview
+Version 17.4.0 Preview 2.1,
+Emulator Android 13.0 - API 33,
+Smartphone Samsung S22,
+Polar H10 Heart Rate Sensor.
