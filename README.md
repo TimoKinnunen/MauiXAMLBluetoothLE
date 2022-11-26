@@ -13,3 +13,9 @@ Version 17.4.0 Preview 2.1,
 Emulator Android 13.0 - API 33,
 Smartphone Samsung S22,
 Polar H10 Heart Rate Sensor.
+
+20221126 Janus Weil is doing amazing work with Plugin.BLE. It is a beta!
+#### 3.0.0-beta.1
+- Add support for .NET 6 and MAUI, while keeping compatibility with Xamarin
+- #614 Upgrade to .NET 6
+- #638 GitHub Actions: update to .NET 7 (fixes #622, #626, #630)
